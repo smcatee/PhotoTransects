@@ -1,0 +1,52 @@
+
+Notes for cropping w/ OpenCV
+
+bilateralFilter - a pixel smoothing (blurring) function that attempts to not smooth away edges
+	filter - window of coefficients sliding across an image, filtering(modifying) the pixels by that coefficent
+	kernel - coefficients of the filter
+
+erode and dilate
+	for removing noise, isolate or join elements in image, find intensity of bumps/holes
+	applies a 'structuring element' to image
+	dilation - kernel scans over image and finds maximum value, then replaces all pixels w/ that value
+		lighter pixels dilate over darker pixels
+	erosion - kernel scans over for local minimum, replaces all w/ that value
+		darker pixels erode over lighter pixels
+
+canny edge detection	
+	uses sobel kernel to find image gradients
+	edge detection within a threshold maxVal and minVal
+	cv2.Canny(img, maxVal, minVal)
+
+contours
+	a curve at boundary of all areas of same color or intensity
+	useful for shape analysis, object detection and recognition
+	object found should be white, and background black
+	first apply threshold or canny edge detection
+	cv2.CHAIN_APPROX_SIMPLE
+		saves only beginning and end of lines, rather than all points on line
+	contour features
+		moment - weighted average of pixels to detect characteristics, e.g. center
+		contour area - cv2.contourArea(cnt)
+		contour perimeter - (arc length) cv2.arcLength(cnt,True)
+		contour approximation - reduces contour shape vertices based on specifications, e.g. finding square!
+			uses Ramer–Douglas–Peucker algorithm
+			elipson - max distance from contour to approximated contour
+		convex hull - removes/reduces convex curves
+		check convexity - cv.isContourConvex(cnt)
+		Bounding Rectangles
+			straight bounding rectangle - vertical/horizontal lines
+			rotated rectangle - minimizes area
+			minimum enclosing circle
+			fit ellipse
+			fit line
+
+steps:
+	grayscale, dilate, keep high values up while strongly pulling low values down, canny edge, contour approx
+
+
+Notes for classification
+https://docs.opencv.org/2.4/doc/tutorials/tutorials.html
+
+OpenCV histogram
+https://docs.opencv.org/2.4/doc/tutorials/imgproc/histograms/histogram_calculation/histogram_calculation.html#histogram-calculation
