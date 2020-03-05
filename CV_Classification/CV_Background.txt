@@ -1,5 +1,6 @@
 
 Notes for cropping w/ OpenCV
+	close example https://docs.opencv.org/trunk/db/d00/samples_2cpp_2squares_8cpp-example.html#a20
 
 bilateralFilter - a pixel smoothing (blurring) function that attempts to not smooth away edges
 	filter - window of coefficients sliding across an image, filtering(modifying) the pixels by that coefficent
@@ -32,6 +33,8 @@ contours
 		contour approximation - reduces contour shape vertices based on specifications, e.g. finding square!
 			uses Ramer–Douglas–Peucker algorithm
 			elipson - max distance from contour to approximated contour
+				epsilon = 0.1*cv.arcLength(cnt,True)
+				approx = cv.approxPolyDP(cnt,epsilon,True)
 		convex hull - removes/reduces convex curves
 		check convexity - cv.isContourConvex(cnt)
 		Bounding Rectangles
