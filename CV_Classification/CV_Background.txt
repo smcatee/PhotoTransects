@@ -45,7 +45,7 @@ contours
 			fit line
 
 steps:
-	grayscale, dilate, keep high values up while strongly pulling low values down, canny edge, contour approx
+	grayscale, dilate, cv2.threshold, canny edge, contour approx, get furthest diagonal corners, crop
 
 
 Notes for classification
